@@ -1,0 +1,18 @@
+{
+  "emojis": {
+    "location": "images/icons/location.png",
+    "time": "images/icons/time.png"
+  },
+  "modal_emojis": {
+    "date": "images/icons/time.png",
+    "time": "images/icons/time.png",
+    "location": "images/icons/location.png",
+    "category": "images/icons/label.png",
+    "details": "images/icons/description.png"
+  },
+  "headers": {
+    "currentEvents": "開催中のイベントはこちら！",
+    "nextEvents": "次のイベントをチェック！",
+    "allEventsLink": "ぜんぶのイベントを見る "
+  }
+}

@@ -1,0 +1,132 @@
+/* 1. ラッパー (.wrapper) */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100vw;
+}
+
+/* 2. イメージコンテナ (.image-container) */
+.image-container {
+    position: relative;
+    width: 100vw;
+    /* 820x1180の比率を固定 (143.90%) */
+    height: 0;
+    padding-bottom: 143.90%;
+}
+
+/* 3. 画像 (img) の基本設定 */
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 画像が切れるのを防ぐ */
+}
+
+.main-back-image {
+    z-index: 1;
+}
+
+/* ⭐︎ 前面画像: main-smaho の設定 (slideIn アニメーション) */
+.main-smaho {
+    z-index: 2;
+    top: 2vh;
+    left: 2vw;
+    width: calc(100% - 2vw);
+    height: calc(100% - 2vh);
+
+    /* ⭐︎ slideIn アニメーション初期状態 */
+    transform: translateX(180px);
+    opacity: 0;
+}
+
+/* 前面画像: main-human の設定 (poyoyon アニメーション) */
+.main-human {
+    z-index: 3;
+    top: 2vh;
+    left: 2vw;
+    width: calc(100% - 2vw);
+    height: calc(100% - 2vh);
+
+    /* poyoyon アニメーション初期状態 */
+    transform: translateX(-140px);
+    opacity: 0;
+}
+
+
+/* --- アニメーションの定義 --- */
+
+/* ⭐︎ slideIn アニメーション実行クラス */
+.main-smaho.is-animated {
+    animation: slideIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* ⭐︎ poyoyon アニメーション実行クラス */
+.main-human.is-animated {
+    animation: poyoyon 0.5s cubic-bezier(0.12, 0, 0.39, 0) 1 forwards;
+}
+
+/* ⭐︎ slideIn キーフレーム */
+@keyframes slideIn {
+    0% {
+        transform: translateX(180px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1; /* 40%, 100%を統合して100%に */
+    }
+}
+
+/* poyoyon キーフレーム */
+@keyframes poyoyon {
+    0% {
+        transform: translateX(-140px); /* 初期値に合わせて開始位置を修正 */
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(0);
+    }
+    65% {
+        transform: translateX(30px);
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+/* 4. メディアクエリ (スマートフォン/タブレット向け) */
+@media (max-width: 768px) {
+    /* wrapperの配置を上書きし、上端に寄せる */
+    .wrapper {
+        align-items: flex-start;
+        min-height: auto;
+        padding-top: 5px;
+    }
+
+    .image-container {
+        width: 100vw;
+    }
+
+    .main-smaho, .main-human { /* 両方の前面画像をまとめて調整 */
+        top: 1vh;
+        left: 1vw;
+        width: calc(100% - 1vw);
+        height: calc(100% - 1vh);
+    }
+
+    /* ⭐︎ スマホでのアニメーション初期状態も調整 */
+    .main-smaho {
+        transform: translateX(50px); /* スマホ画面の幅を考慮し、初期位置を小さく調整 */
+    }
+    .main-human {
+        transform: translateX(-50px); /* スマホ画面の幅を考慮し、初期位置を小さく調整 */
+    }
+}

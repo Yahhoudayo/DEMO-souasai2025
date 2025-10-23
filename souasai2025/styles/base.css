@@ -1,0 +1,89 @@
+/* base.css */
+
+/* Google Fontsからフォントをインポート */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
+/* --- ライトテーマ（明るい配色）カラー定義 --- */
+:root {
+    --color-primary: #00AEEF; /* メインの鮮やかなスカイブルー */
+    --color-accent: #0077B6; /* 濃いめのアクセントブルー（リンクのホバーなど） */
+    --color-background-light: #FFFFFF; /* 純粋な白の背景 */
+    --color-background-card: #F8F8FF; /* カード背景（わずかに青みがかった白） */
+    --color-text-dark: #222222; /* 濃いテキスト色 */
+    --color-text-dim: #555555; /* 薄めのテキスト色 */
+    --color-border: #DDDDDD; /* 枠線（薄いグレー） */
+
+    /* ⭐ ここから追加: ポップなタイトル用のカラー変数 */
+    --pop-primary: #0096C7; /* 少し深みのあるシアンブルー */
+    --pop-accent: #FF8FAB; /* 明るいコーラルピンク */
+    --pop-yellow: #FFD166; /* 温かみのあるオレンジイエロー */
+    --pop-dark: #2A323A;  /* 濃紺に近いダークグレー */
+}
+html,
+body {
+    overflow-x: hidden;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+    background-color: var(--color-background-light); /* 白背景 */
+    color: var(--color-text-dark); /* 濃いテキスト色 */
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* 背景パターンを非常に薄くする */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+            radial-gradient(circle at 20% 20%, rgba(0, 174, 239, 0.05) 1px, transparent 1px),
+            radial-gradient(circle at 80% 80%, rgba(0, 119, 182, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px, 70px 70px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* レスポンシブデザインの共通設定 */
+@media (max-width: 768px) {
+    /* ここには全般的なレイアウトやコンポーネントに影響する基本設定のみを維持 */
+    /* 個別の要素のサイズ調整はcomponent.cssに移動 */
+}
+.font-baloo {
+    font-family: 'Baloo 2', cursive;
+}
+
+/* ⭐ ここから追加: ポップなタイトルデザイン用の新しいクラス */
+.title-pop {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    font-size: 4rem;
+
+    /* グラデーションテキスト */
+    background: linear-gradient(45deg, var(--pop-yellow), var(--pop-accent) 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    /* 縁取りと影 */
+    -webkit-text-stroke: 4px var(--pop-dark);
+    text-stroke: 4px var(--pop-dark);
+    text-shadow: 7px 7px 0px var(--pop-primary);
+
+    /* アニメーションと配置 */
+    transition: transform 0.3s ease;
+    transform: rotate(-2.5deg);
+}
+
+.title-pop:hover {
+    transform: rotate(1.5deg) scale(1.05);
+}
