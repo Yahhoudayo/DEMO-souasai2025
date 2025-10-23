@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <title>蒼阿祭2025</title>
+    <link rel="stylesheet" href="styles/component.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/base.css">
+</head>
+<body>
+<header-component></header-component>
+
+<main>
+<!--    <section class="hero-section">-->
+<!--        <div class="hero-image"></div>-->
+<!--        <div class="hero-text">-->
+<!--            <h1 class="main-title">蒼阿祭2025</h1>-->
+<!--            <p class="subtitle">制作中</p>-->
+<!--        </div>-->
+<!--    </section>-->
+
+        <home-animation-component></home-animation-component>
+
+    <div class="section-divider"></div>
+    <section id="news">
+        <h2 class="section-title title-pop">NEWS</h2>
+        <news-section-component></news-section-component>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="schedule">
+        <h2 class="section-title title-pop">Schedule</h2>
+        <schedule-component mode="current"></schedule-component>
+    </section>
+
+    <section class="exhibit-section" id="exhibition">
+        <h2 class="section-title title-pop">Exhibition</h2>
+
+        <div>
+            <exhibit-scroll-component></exhibit-scroll-component>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+
+    <section class="store-section">
+        <h2 class="section-title">売店・模擬店</h2>
+        <div class="store-container">
+            飲食物や物品の模擬店、売店の情報が入ります。（例：メニュー、配置図）
+        </div>
+        <a href="#" class="more-btn" style="margin-top: 3rem;">配置図を見る</a>
+    </section>
+
+    <section class="exhibit-section" id="map">
+        <h2 class="section-title title-pop">Map</h2>
+    <map-container-component></map-container-component>
+    </section>
+    
+</main>
+<script src="scripts/main.js" type="module"></script>
+<script src="componet/home-animation-componet.js"></script>
+<script src="componet/header-component.js"></script>
+<script src="componet/news-section-component.js"></script>
+
+<script src="componet/map-component.js"></script>
+<script src="componet/map-component-2.js"></script>
+<script src="componet/map-component-3.js"></script>
+<script src="componet/map-component-4.js"></script>
+
+<script src="componet/map-container-component.js"></script>
+<script src="componet/schedule-componet.js"></script>
+<script src="componet/exhibit-scroll-component.js"></script>
+</body>
+</html>

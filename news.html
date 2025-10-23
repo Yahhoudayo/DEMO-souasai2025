@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <title>蒼阿祭2025</title>
+    <link rel="stylesheet" href="styles/base.css">
+
+    <style>
+        /* 外部フォントの読み込み */
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=M+PLUS+Rounded+1c:wght@500;700;800&display=block');
+
+        /* このページ専用のポップな変数定義 */
+        body {
+            --primary-color: #0096C7;
+            --accent-color: #FF8FAB;
+            --yellow-color: #FFD166;
+            --dark-color: #2A323A;
+            --font-title: 'Baloo 2', cursive;
+            --font-body: 'M PLUS Rounded 1c', sans-serif;
+            font-family: var(--font-body);
+        }
+
+        .news-page-container {
+            max-width: 800px;
+            margin: 120px auto 50px auto;
+            padding: 0 20px;
+        }
+
+        /* --- タイトルをポップなデザインに --- */
+        .section-title {
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 5em;
+            margin-bottom: 50px;
+            text-align: center;
+            background: linear-gradient(45deg, var(--yellow-color), var(--accent-color) 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-stroke: 4px var(--dark-color);
+            text-stroke: 4px var(--dark-color);
+            text-shadow: 7px 7px 0px var(--primary-color);
+            transform: rotate(-2.5deg);
+        }
+
+        /* --- ニュース一覧のスタイル --- */
+        #all-news-grid {
+            display: block;
+            margin-top: 2rem;
+        }
+
+        /* --- ニュースカードをポップなデザインに --- */
+        .news-card-link {
+            display: block;
+            padding: 1.5rem;
+            margin-bottom: 25px;
+            background-color: white;
+            border-radius: 16px;
+            border: 3px solid var(--dark-color);
+            box-shadow: 8px 8px 0 var(--dark-color);
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+
+        .news-card-link:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0 var(--dark-color);
+        }
+
+        .news-date {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-title {
+            font-family: var(--font-body);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--dark-color);
+        }
+
+        /* 概要表示は削除 */
+        .news-excerpt {
+            display: none;
+        }
+
+        /* --- 記事詳細ページもポップなカードデザインに --- */
+        .article-container {
+            background-color: white;
+            border-radius: 16px;
+            border: 3px solid var(--dark-color);
+            box-shadow: 8px 8px 0 var(--dark-color);
+            padding: 2.5rem;
+        }
+
+        .article-header {
+            border-bottom: 2px dashed #ccc;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .article-title {
+            font-family: var(--font-body);
+            font-weight: 800;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-top: 10px;
+        }
+
+        .article-body p {
+            font-size: 1rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        /* --- 戻るボタンをポップなデザインに --- */
+        .more-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2.5rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1.1em;
+            border: 3px solid var(--dark-color);
+            box-shadow: 5px 5px 0 0 var(--dark-color);
+            transition: all 0.2s ease-in-out;
+        }
+        .more-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0 0 var(--dark-color);
+        }
+
+        /* レスポンシブ調整 */
+        @media (max-width: 768px) {
+            .news-page-container {
+                margin: 100px auto 30px auto;
+            }
+            .section-title {
+                font-size: 3.5em;
+                -webkit-text-stroke: 3px var(--dark-color);
+                text-stroke: 3px var(--dark-color);
+            }
+            .article-container {
+                padding: 1.5rem;
+            }
+            .article-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header-component></header-component>
+
+<main class="news-page-container">
+    <h1 class="section-title"></h1>
+
+    <div id="article-content" style="display: none;">
+    </div>
+
+    <section id="news-list-section" style="display: none;">
+        <div id="all-news-grid">
+        </div>
+    </section>
+</main>
+
+<script type="module">
+    // 必要な関数をインポート
+    import { loadNews, loadArticle } from './scripts/news.js';
+
+    // ヘッダーコンポーネントをインポート
+    import './componet/header-component.js';
+
+    // ページの読み込みが完了したときの処理
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleContent = document.getElementById('article-content');
+        const newsListSection = document.getElementById('news-list-section');
+        const pageTitle = document.querySelector('h1.section-title');
+
+        if (urlParams.has('id')) {
+            // IDがある場合: 記事詳細を表示
+            articleContent.style.display = 'block';
+            newsListSection.style.display = 'none';
+            pageTitle.textContent = 'News'; // 詳細ページのタイトル
+            loadArticle();
+        } else {
+            // IDがない場合: ニュース一覧を表示
+            articleContent.style.display = 'none';
+            newsListSection.style.display = 'block';
+            pageTitle.textContent = 'News List'; // 一覧ページのタイトル
+            loadNews();
+        }
+    });
+</script>
+</body>
+</html>
